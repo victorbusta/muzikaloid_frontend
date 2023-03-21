@@ -14,15 +14,15 @@ body {
   place-items: center;
 }
 
-a,
-.green {
+a {
   text-decoration: none;
-  color: #ED0180;
+  color: var(--vt-c-black);
   transition: 0.4s;
 }
 
 @media (hover: hover) {
   a:hover {
-    background-color: #ed017f24;
+    background-color: #7777;
   }
 }
+

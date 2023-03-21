@@ -1,19 +1,17 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Frame 5" clip-path="url(#clip0_112_35)">
 <g id="logo">
-<g id="circ">
-<ellipse id="secondCirc" cx="32" cy="39.0566" rx="32" ry="33.0566" fill="#17407C"/>
-<path id="firstCirc" d="M53.3333 44.566C53.3333 56.7371 43.7821 66.6038 32 66.6038C20.2179 66.6038 10.6667 56.7371 10.6667 44.566C10.6667 32.3949 20.2179 22.5283 32 22.5283C43.7821 22.5283 53.3333 32.3949 53.3333 44.566Z" fill="#9A19E8"/>
-</g>
+<path id="R2" d="M0 6C0 2.68629 2.68629 0 6 0H26C29.3137 0 32 2.68629 32 6V26C32 29.3137 29.3137 32 26 32H6C2.68629 32 0 29.3137 0 26V6Z" fill="#181818"/>
+<path id="R1" d="M4 8C4 5.79086 5.79086 4 8 4H24C26.2091 4 28 5.79086 28 8V24C28 26.2091 26.2091 28 24 28H8C5.79086 28 4 26.2091 4 24V8Z" fill="#444444"/>
 <g id="man">
-<ellipse id="manBody" cx="32.3333" cy="61.0377" rx="17.3333" ry="22.0377" fill="#ED0180"/>
-<ellipse id="manHead" cx="32" cy="26.3962" rx="12" ry="12.3962" fill="#ED0180"/>
+<ellipse id="manBody" cx="16" cy="27.527" rx="7" ry="6.52703" fill="#181818"/>
+<ellipse id="manHead" cx="16.3333" cy="15.973" rx="5.33333" ry="4.97297" fill="#181818"/>
 </g>
 </g>
 </g>
 <defs>
 <clipPath id="clip0_112_35">
-<rect width="64" height="64" fill="white"/>
+<rect width="32" height="32" fill="white"/>
 </clipPath>
 </defs>
 </svg>

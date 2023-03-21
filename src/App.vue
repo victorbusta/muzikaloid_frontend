@@ -2,11 +2,25 @@
 import { RouterLink, RouterView } from 'vue-router'
 import LoginItem from './components/LoginItem.vue'
 import MuzikaloidLogo from './components/logos/LogoMuzikaloid.vue'
+import * as animation from './utils/utils.animation'
+
+var opened = false;
+
+function openNav() {
+  if (window.screen.width < 688) {
+    animation.translateX('.nav', opened ? '-142px' : '0px');
+    opened = !opened;
+  }
+}
+
 </script>
 
 <template>
-  <header>
+  <div @click="openNav">
     <MuzikaloidLogo />
+  </div>
+  <header class="nav">
+    <div class="logo"></div>
     <nav>
         <RouterLink to="/"><span>Accueil</span></RouterLink>
         <RouterLink to="/articles"><span>Articles</span></RouterLink>
@@ -36,21 +50,9 @@ import MuzikaloidLogo from './components/logos/LogoMuzikaloid.vue'
 
 <style scoped>
 @keyframes headerAnim {
-  0% {
-    transform: translate(-50%, -50%);
-  }
-
-  50% {
-    transform: translate(-50vw, -50vh);
-  }
-
   100% {
-    width: 100%;
-    border-bottom-style: solid;
-    border-color: black;
-    border-width: 1px;
-    transform: translate(-50vw, -50vh);
-    }
+    transform: translateX(0);
+  }
 }
 
 @keyframes showAnim {
@@ -63,12 +65,7 @@ import MuzikaloidLogo from './components/logos/LogoMuzikaloid.vue'
 }
 
 @keyframes logoAnim {
-  0% {
-    height: 96px;
-  }
-
   100% {
-    height: 64px;
     transform: translate(0);
   }
 }
@@ -76,24 +73,35 @@ import MuzikaloidLogo from './components/logos/LogoMuzikaloid.vue'
   header {
     position: fixed;
     display: flex;
+    width: 100%;
     justify-content: space-between;
+    background-color: #444444;
     align-items: center;
-    transform: translate(-50%, -50%);
-    animation: 500ms ease-in-out 600ms 1 headerAnim forwards;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    animation: 500ms ease-in-out 300ms 1 headerAnim forwards;
   }
 
-  svg {
-    position: absolute;
-    animation: 400ms ease-in-out 600ms 1 logoAnim forwards;
+  .logo {
+    width: 96px;
+  }
+
+  #logo {
+    position: fixed;
+    animation: 400ms ease-in-out 300ms 1 logoAnim forwards;
+    top: 0;
+    left: 0;
+    transform: translate(calc(50vw - 134px), 50vh);
+    z-index: 1;
   }
 
   nav {
     opacity: 0;
-    left: 246px;
     display: flex;
     text-align: center;
-    /* justify-content: space-between; */
-    animation: 200ms ease-in-out 1100ms 1 showAnim forwards;
+    animation: 200ms ease-in-out 800ms 1 showAnim forwards;
+    transition: all 500ms ease-in-out;
   }
 
   nav > a {
@@ -101,18 +109,62 @@ import MuzikaloidLogo from './components/logos/LogoMuzikaloid.vue'
     align-items: center;
     height: 48px;
     margin: 0 16px 0 16px;
-    border-radius: 8px;
+    border-radius: 16px;
+  }
+
+  .router-link-active {
+    /* height: 64px; */
+    background-color: var(--vt-c-black);
+    color: #444444;
   }
 
   nav > a > span {
     margin: 0 16px 0 16px;
     font-weight: bolder;
+
   }
 
   .login {
     opacity: 0;
     height: 64px;
     width: 64px;
-    animation: 200ms ease-in-out 1100ms 1 showAnim forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: 200ms ease-in-out 800ms 1 showAnim forwards;
+  }
+
+  @media (max-width: 688px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      height: 100vh;
+      width: 142px;
+      transform: translateY(-100vh);
+      transform: translateX(-142px);
+    }
+
+    .logo {
+    height: 96px;
+  }
+
+    nav {
+      left: 0px;
+      flex-direction: column;
+    }
+
+    nav > a {
+    margin: 8px;
+  }
+
+    .login {
+      width: 100%;
+    }
+
+    @keyframes headerAnim {
+      100% {
+        transform: translateX(-142px);
+      }
+    }
   }
 </style>
