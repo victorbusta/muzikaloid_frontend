@@ -22,12 +22,7 @@
 </template>
 
 <style scoped>
-
 @keyframes slideInRight {
-  0% {
-    transform: translateX(10%);
-    opacity: 0;
-  }
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -35,20 +30,12 @@
 }
 
 @keyframes m2Anim {
-  0% {
-    transform: translate(5px, 5px);
-  }
-
   100% {
     transform: translate(0, 0);
   }
 }
 
 @keyframes m3Anim {
-  0% {
-    transform: translate(10px, 10px);
-  }
-
   100% {
     transform: translate(0, 0);
   }
@@ -82,19 +69,26 @@ svg {
 
 #text {
   opacity: 0;
-  transform: translateX(10%);
+  transform: translateX(8px);
   animation: 100ms linear 100ms 1 slideInRight forwards;
 }
 
 @media (max-width: 1023px) {
   #text {
-    opacity: 1;
-    transform: translateX(0%);
-    animation: 100ms linear 500ms 1 slideInRight forwards;
+    animation: 1100ms linear 100ms 1 slideInRight forwards;
   }
+
   @keyframes slideInRight {
+    10% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
     100% {
       opacity: 0;
+      transform: translateX(0);
     }
   }
 }

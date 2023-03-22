@@ -7,7 +7,8 @@ import * as animation from './utils/utils.animation'
 var opened = false;
 
 function openNav() {
-  if (window.screen.width < 688) {
+  if (window.innerWidth < 688) {
+
     animation.translateX('.nav', opened ? '-142px' : '0px');
     opened = !opened;
   }
@@ -20,7 +21,6 @@ function openNav() {
     <MuzikaloidLogo />
   </div>
   <header class="nav">
-    <div class="logo"></div>
     <nav>
         <RouterLink to="/"><span>Accueil</span></RouterLink>
         <RouterLink to="/articles"><span>Articles</span></RouterLink>
@@ -32,20 +32,7 @@ function openNav() {
     </div>
   </header>
 
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="salut leo" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView /> -->
+  <RouterView />
 </template>
 
 <style scoped>
@@ -74,22 +61,18 @@ function openNav() {
     position: fixed;
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-end;
     background-color: #444444;
     align-items: center;
     top: 0;
     left: 0;
     transform: translateX(-100%);
-    animation: 500ms ease-in-out 300ms 1 headerAnim forwards;
-  }
-
-  .logo {
-    width: 96px;
+    animation: 500ms ease-in-out 1000ms 1 headerAnim forwards;
   }
 
   #logo {
     position: fixed;
-    animation: 400ms ease-in-out 300ms 1 logoAnim forwards;
+    animation: 400ms ease-in-out 1000ms 1 logoAnim forwards;
     top: 0;
     left: 0;
     transform: translate(calc(50vw - 134px), 50vh);
@@ -144,10 +127,6 @@ function openNav() {
       transform: translateX(-142px);
     }
 
-    .logo {
-    height: 96px;
-  }
-
     nav {
       left: 0px;
       flex-direction: column;
@@ -159,6 +138,7 @@ function openNav() {
 
     .login {
       width: 100%;
+      margin-bottom: 96px;
     }
 
     @keyframes headerAnim {
