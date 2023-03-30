@@ -57,13 +57,13 @@ svg {
 
 #M2 {
   fill: #9A19E8;
-  transform: translate(5px, 6px);
+  transform: translate(5px, 5px);
   animation: 100ms ease-out 200ms 1 m2Anim forwards;
 }
 
 #M3 {
   fill: #17407C;
-  transform: translate(10px, 11px);
+  transform: translate(10px, 9px);
   animation: 100ms ease-out 200ms 1 m3Anim forwards;
 }
 

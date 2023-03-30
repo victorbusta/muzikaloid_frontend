@@ -34,7 +34,7 @@ export function rotate(selector: string, rotation: string, duration = 150) {
 }
 
 export function rotateEl(el: Element, rotation: string, duration = 150) {
-  el.animate([{ rotate: rotation }], {
+  el.animate([{ transform: `rotateY(${rotation})` }], {
     duration: duration,
     fill: "forwards",
   });
