@@ -22,8 +22,8 @@ a {
 }
 
 @media (hover: hover) {
-  a:hover {
+  /* a:hover {
     background-color: #7777;
-  }
+  } */
 }
 

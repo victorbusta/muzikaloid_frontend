@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import LoginItem from './components/LoginItem.vue'
+import LoginIcon from './components/icons/IconLogin.vue';
 import MuzikaloidLogo from './components/logos/LogoMuzikaloid.vue'
 import * as animation from './utils/utils.animation'
 import { ref } from 'vue';
@@ -11,7 +12,7 @@ let modal = ref(false);
 const openNav = () => {
   if (window.innerWidth < 816) {
 
-    animation.translateX('.nav', opened ? '-182px' : '0px');
+    animation.translateX('.nav', opened ? '-132px' : '0px');
     opened = !opened;
   }
 }
@@ -32,15 +33,18 @@ const openModal = () => {
         <RouterLink to="/articles"><h2>Articles</h2></RouterLink>
         <RouterLink to="/machines"><h2>Machines</h2></RouterLink>
         <RouterLink to="/components"><h2>Composants</h2></RouterLink>
+
+        <i>
+          <LoginIcon @click="openModal"/>
+        </i>
+
+        <LoginItem v-if="modal" />
     </nav>
-    <div class="login">
-      <LoginItem :modal="modal" @openModal="openModal"/>
-    </div> 
   </header>
   <div class="curtains"></div>
-<main>
-  <RouterView />
-</main>
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
@@ -49,13 +53,15 @@ header {
   display: flex;
   width: 100%;
   justify-content: flex-end;
-  background-color: var(--color-text);
+  background-color: var(--color-background);
   align-items: center;
   top: 0;
   left: 0;
+  height: 64px;
   transform: translateX(-100%);
   animation: 500ms ease-in-out 1000ms 1 headerAnim forwards;
   z-index: 1;
+  filter: drop-shadow(0 0 0.5rem black);
 }
 
 .logo {
@@ -75,6 +81,7 @@ header {
 nav {
   opacity: 0;
   display: flex;
+  align-items: center;
   text-align: center;
   animation: 200ms ease-in-out 800ms 1 showAnim forwards;
   transition: all 500ms ease-in-out;
@@ -86,28 +93,30 @@ nav > a {
   height: 48px;
   margin: 0 16px 0 16px;
   border-radius: 16px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--color-background);
+  color: var(--color-text);
+}
+
+nav > a:hover {
+  border-color: var(--color-text);
+}
+
+nav > i {
+  margin-right: 32px;
 }
 
 .router-link-active {
   /* height: 64px; */
-  background-color: var(--color-background);
-  color: var(--color-text);
+  background-color: var(--color-text);
+  color: var(--color-background);
 }
 
 nav > a > h2 {
   margin: 0 16px 0 16px;
   font-weight: bolder;
-
-}
-
-.login {
-  opacity: 0;
-  height: 64px;
-  width: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: 200ms ease-in-out 800ms 1 showAnim forwards;
+  font-size: small;
 }
 
 main {
@@ -164,11 +173,14 @@ main {
 @media (max-width: 816px) {
   header {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     align-items: flex-start;
+    background-color: var(--color-text);
     height: 100vh;
-    width: 182px;
+    width: 132px;
     transform: translateY(-100vh);
-    transform: translateX(-182px);
+    transform: translateX(-132px);
   }
 
   nav {
@@ -176,18 +188,34 @@ main {
     flex-direction: column;
   }
 
-  nav > a {
-  margin: 8px;
-}
+  nav > i {
+    margin: 0;
+  }
 
-  .login {
+  nav > a {
+    border-color: var(--color-text);
+    color: var(--color-background);
     width: 100%;
-    margin-bottom: 96px;
+    margin: 8px;
+  }
+
+  nav > a:hover {
+    border-color: var(--color-background);
+  }
+
+  .router-link-active {
+    /* height: 64px; */
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  main {
+    width: calc(100% - 164px);
   }
 
   @keyframes headerAnim {
     100% {
-      transform: translateX(-182px);
+      transform: translateX(-132px);
     }
   }
 }
