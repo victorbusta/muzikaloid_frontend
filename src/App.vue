@@ -31,9 +31,7 @@ const openModal = () => {
     <nav>
         <RouterLink to="/"><h2>Accueil</h2></RouterLink>
         <RouterLink to="/articles"><h2>Articles</h2></RouterLink>
-        <RouterLink to="/machines"><h2>Machines</h2></RouterLink>
-        <RouterLink to="/components"><h2>Composants</h2></RouterLink>
-
+        <RouterLink to="/hardwares"><h2>Hardwares</h2></RouterLink>
         <i>
           <LoginIcon @click="openModal"/>
         </i>
@@ -41,7 +39,6 @@ const openModal = () => {
         <LoginItem v-if="modal" />
     </nav>
   </header>
-  <div class="curtains"></div>
   <main>
     <RouterView />
   </main>
@@ -120,23 +117,13 @@ nav > a > h2 {
 }
 
 main {
+  opacity: 0;
   grid-row: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   animation: 200ms ease-in-out 1400ms 1 showAnim forwards;
-  width: calc(100% - 128px);
-}
-
-.curtains {
-  position: absolute;
-  grid-row: 2;
-  background-color: var(--color-background);
-  z-index: 1;
-  /* height: calc(100vh - 64px); */
-  height: 100vh;
-  width: 100vw;
-  animation: 200ms ease-in-out 1400ms 1 hideAnim forwards;
+  width: 90%
 }
 
 @keyframes headerAnim {
@@ -210,7 +197,7 @@ main {
   }
 
   main {
-    width: calc(100% - 164px);
+    width: 99%;
   }
 
   @keyframes headerAnim {

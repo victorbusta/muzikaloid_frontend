@@ -1,57 +1,91 @@
 <script setup lang="ts">
+  import MagnifyIcon from './icons/IconMagnify.vue';
+  import LoadingIcon from './icons/IconLoader.vue';
+  import DocumentCarrousel from './carrousels/CarrouselDocuments.vue'
+  import { HTTP, getDocObjUrl } from '@/utils/utils.http';
   import { ref } from 'vue';
 
-  const homeArticle = ref({name: String, createdAt: Date, subDescription: String, description: String});
+  const homeArticle = ref({name: '', subDescription: '', createdAt: '', description: ''});
+  const homeLoading = ref(true);
   const ppDocument = ref();
   const ppDocumentName = ref();
+  const ppDocLoading = ref(true);
+  const errors = ref<string[]>([]);
 
-  const getHomeArticle = async () => {
-    const res = await fetch("http://localhost:3000/articles/1");
-    const finalRes = await res.json();
-    homeArticle.value = finalRes;
+  const getHomeArticle = () => {
+    HTTP.get("articles/1")
+    .then(res => {
+      homeLoading.value = false;
+      homeArticle.value = res.data;
+    })
+    .catch(e => {
+      errors.value.push(e);
+    });   
   }
 
-  const getHomeDocuments = async () => {
-      const res = await fetch("http://localhost:3000/articles/1/documents");
-      const finalRes = await res.json();
-      finalRes.forEach(async (document: any) => {
-        if (document.documentType.type === "PP") {
-          ppDocumentName.value = document.name;
-          const docRes = await fetch(`http://localhost:3000/articledocuments/${document.id}`);
-          const finalDocRes = await docRes
-          const blob = await finalDocRes.blob();
-
-          console.log(blob);
-
-          ppDocument.value = URL.createObjectURL(blob);
+  const getHomeDocuments = () => {
+    HTTP.get("articles/1/documents")
+    .then(res => {
+      res.data.forEach((doc: any) => {
+        if (doc.documentType.type === "PP") {
+          ppDocumentName.value = doc.name;
+          getDocObjUrl(doc.id)
+          .then(url => {
+            ppDocLoading.value = false;
+            ppDocument.value = url;
+          });
         }
-      });
-    }
+      })
+    })
+    .catch(e => {
+      errors.value.push(e);
+    });
+  }
+
 
   getHomeArticle();
   getHomeDocuments();
 </script>
 
 <template>
-  <h1>
-    {{ homeArticle.name }}
-  </h1>
-  <h3>
-    {{ homeArticle.subDescription }}
-  </h3>
-  <h4>
-    {{ homeArticle.createdAt.toLocaleString() }}
-  </h4>
-  <div class="content">
-    <div class="ppdoc">
-      <img :src="ppDocument">
-      <a :href="ppDocument">{{ ppDocumentName }}</a>
-    </div>
-    <p>
-      {{ homeArticle.description }}
-    </p>
+  <div v-if="homeLoading" >
+    <LoadingIcon />
   </div>
+  <div v-else>
 
+    <h1>
+      {{ homeArticle.name }}
+    </h1>
+    <h3>
+      {{ homeArticle.subDescription }}
+    </h3>
+    <h4>
+      {{ new Date(homeArticle.createdAt).toLocaleDateString() }}
+    </h4>
+    <div class="content">
+
+      <div class="ppdoc">
+        <div v-if="ppDocLoading">
+        <LoadingIcon />
+        </div>
+        <div v-else>
+          <img :src="ppDocument">
+          <a :href="ppDocument"><MagnifyIcon /></a>
+        </div>
+      </div>
+
+      <p>
+        {{ homeArticle.description }}
+      </p>
+
+      <div class="doc">
+        <DocumentCarrousel docsEndPoint="articles/1/documents" />
+        <!-- <DocumentCarrousel /> -->
+      </div>
+
+    </div>
+
+  </div>
 </template>
 
 <style scoped>
@@ -63,7 +97,11 @@ h1 {
 h3 {
   width: 100%;
   font-size: 1rem;
+  border-bottom: 1px solid;
+}
 
+hr {
+  width: 100%;
 }
 
 h4 {
@@ -72,9 +110,6 @@ h4 {
   font-size: .7rem;
 }
 
-img {
-  /* width: 40%; */
-}
 
 .content {
   width: 100%;
@@ -85,7 +120,15 @@ img {
 .ppdoc {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 20%;
+}
+
+.ppdoc > div > img {
+  width: 100%;
+}
+
+.doc {
+  width: 30%;
 }
 
 a {
@@ -94,21 +137,17 @@ a {
   border-radius: 0 0 4px 4px;
 }
 
-a:hover {
-  background-color: var(--color-hover);
-}
-
 p {
-  margin: 16px;
-  width: 60%;
+  margin: 0 16px;
+  width: 50%;
   text-align: justify;
-  font-size: larger;
+  font-size: 1rem;
   white-space: pre-line;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 816px) {
   p {
-    width: 60%;
+    font-size: .9rem;
   }
 }
 

@@ -77,8 +77,6 @@ const submitRegister = async () => {
     return;
   }
 
-  console.log(response);
-
   localStorage.setItem('access_token', await response.access_token);    
   errors.value = 'succesfully registered';
 }
