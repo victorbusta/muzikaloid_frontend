@@ -28,23 +28,23 @@
 #m2 {
   fill: #9A19E8;
   transform: translate(4px, 4px);
-  animation: .1s translateM 1.1s ease-out forwards;
+  animation: .1s translateM 0.6s ease-out forwards;
 }
 
 #m3 {
   fill: #17407C;
   transform: translate(8px, 8px);
-  animation: .1s translateM 1.1s ease-out forwards;
+  animation: .1s translateM 550ms ease-out forwards;
 }
 
 svg { 
-  animation: .1s skew 1s ease-out forwards;
+  animation: .1s skew 0.5s ease-out forwards;
 }
 
 #text {
   opacity: 0;
   transform: translateX(50%);
-  animation: .1s translateText .9s ease-out forwards;
+  animation: .1s translateText .4s ease-out forwards;
 }
 
 @keyframes skew {
