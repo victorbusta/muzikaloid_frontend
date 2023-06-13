@@ -5,7 +5,7 @@ import MuzikaloidLogo from './components/logos/LogoMuzikaloid.vue'
 
 <template>
   <div class="logo">
-    <MuzikaloidLogo height="128px"/>
+    <MuzikaloidLogo/>
   </div>
 
   <main>
@@ -14,7 +14,8 @@ import MuzikaloidLogo from './components/logos/LogoMuzikaloid.vue'
 
 </template>
 
-<style scoped>#logo {
+<style scoped>
+#logo {
   height: 128px;
 }
 .logo {
@@ -29,5 +30,11 @@ main {
   top: 50vh;
   left: 50vw;
   transform: translate(-50%,-50%);
+}
+
+@media (max-width: 768px) {
+  #logo {
+    height: 64px;
+  }
 }
 </style>
